@@ -1,0 +1,32 @@
+{
+  "name": "reaolversoft_blog",
+  "version": "1.0.0",
+  "description": "resolversoft/Pavel Pavlov's personal blog",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pavlov83/resolversoft_extended.git"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "author": "Pavel Pavlov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pavlov83/resolversoft_extended/issues"
+  },
+  "homepage": "https://github.com/Pavlov83/resolversoft_extended#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^9.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.7",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.7"
+  }
+}

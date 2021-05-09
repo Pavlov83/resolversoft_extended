@@ -3,29 +3,37 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-require('dotenv').config();
 const mongoose = require('mongoose');
+require('dotenv').config();
+// bring routes
+const blogRoutes = require('./routes/blog');
+const authRoutes = require('./routes/auth');
 
-//app
+// app
 const app = express();
 
-//middlewares
+// db
+mongoose
+    .connect(process.env.DATABASE, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false })
+    .then(() => console.log('DB connected'))
+    .catch(err => {
+        console.log(err);
+    });
+
+// middlewares
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
-if(process.env.NODE_ENV == 'development'){
-app.use(cors({origin: `${process.env.CLIENT_URL}`}));
+// cors
+if (process.env.NODE_ENV === 'development') {
+    app.use(cors({ origin: `${process.env.CLIENT_URL}` }));
 }
+// routes middleware
+app.use('/api', blogRoutes);
+app.use('/api', authRoutes);
 
-mongoose.connect(process.env.DATABASE,{useNewUrlParser:true,useCreateIndex:true,useFindAndModify:false,useUnifiedTopology:true})
-        .then(() => console.log('connected to mongo...'));
-
-
-//routes
-app.get('/api',(req,res) =>{
-    res.json({time: Date().toString()})
-})
-
-//port
+// port
 const port = process.env.PORT || 8000;
-app.listen(port,()=> console.log(`app runs on ${port}`))
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
